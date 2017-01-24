@@ -181,6 +181,7 @@
     <Compile Include="Saves\SaveFile.cs" />
     <Compile Include="MysteryGifts\WC6.cs" />
     <Compile Include="Saves\Substructures\MemeCrypto.cs" />
+    <Compile Include="Saves\Substructures\Musical.cs" />
     <Compile Include="Saves\Substructures\QR7.cs" />
     <Compile Include="Saves\Substructures\ShadowInfo.cs" />
     <Compile Include="Saves\Substructures\StrategyMemo.cs" />

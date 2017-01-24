@@ -668,5 +668,63 @@ namespace PKHeX.Core
             bit = f + pkm.AltForm;
             Data[FormDex + FormLen * (2 + shiny) + bit / 8] |= (byte)(1 << (bit % 8));
         }
+
+        // Musical
+
+        /// <summary>
+        /// Gets the save file's current musical
+        /// </summary>
+        public Musical CurrentMusical {
+            get
+            {
+                switch (Version)
+                {
+                    case GameVersion.BW:
+                        return new Musical(getData(0x56000, 0x1FC00));
+                    case GameVersion.B2W2:
+                        return new Musical(getData(0x55800, 0x17C00));
+                    default:
+                        return null;
+                }
+            }
+            set
+            {
+                // Determine where to write the data
+                int offset;
+                int maxLength;
+                switch (Version)
+                {                    
+                    case GameVersion.BW:
+                        offset = 0x56000;
+                        maxLength = 0x1FC00;
+                        break;
+                    case GameVersion.B2W2:
+                        offset = 0x55800;
+                        maxLength = 0x17C00;
+                        break;
+                    default:
+                        // Should be unreachable.  An exception should probably be thrown, but at the very least, don't write anything.
+                        return;
+                }
+
+                // Get the data
+                var data = value.getData();
+                if (data.Length > maxLength)
+                {
+                    // Don't write any more than the maximum (BW contains more data than B2W2)
+                    data = data.Take(maxLength).ToArray();
+                }
+
+                // Write the data
+                setData(data, offset);
+
+                // Clear unwritten data (imported data could be smaller than the maximum size)
+                byte placeholder = 0;
+                if (data.Length < maxLength)
+                {
+                    setData(Enumerable.Repeat(placeholder, maxLength - data.Length).ToArray(), offset + data.Length);
+                }                
+            }
+        }
     }
 }
