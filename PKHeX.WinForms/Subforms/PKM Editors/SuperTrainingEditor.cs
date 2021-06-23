@@ -8,9 +8,11 @@ namespace PKHeX.WinForms
 {
     public partial class SuperTrainingEditor : Form
     {
-        public SuperTrainingEditor()
+        public SuperTrainingEditor(PKM pk)
         {
+            pkm = (ISuperTrain)pk;
             InitializeComponent();
+            WinFormsUtil.TranslateInterface(this, Main.CurrentLanguage);
             int vertScrollWidth = SystemInformation.VerticalScrollBarWidth;
             TLP_SuperTrain.Padding = TLP_DistSuperTrain.Padding = new Padding(0, 0, vertScrollWidth, 0);
 
@@ -19,28 +21,26 @@ namespace PKHeX.WinForms
             TLP_DistSuperTrain.SuspendLayout();
             TLP_SuperTrain.Scroll += WinFormsUtil.PanelScroll;
             TLP_DistSuperTrain.Scroll += WinFormsUtil.PanelScroll;
-            populateRegimens("SuperTrain", TLP_SuperTrain, reglist);
-            populateRegimens("DistSuperTrain", TLP_DistSuperTrain, distlist);
-            WinFormsUtil.TranslateInterface(this, Main.curlanguage);
+            PopulateRegimens("SuperTrain", TLP_SuperTrain, reglist);
+            PopulateRegimens("DistSuperTrain", TLP_DistSuperTrain, distlist);
             TLP_SuperTrain.ResumeLayout();
             TLP_DistSuperTrain.ResumeLayout();
-            
+
             CHK_SecretUnlocked.Checked = pkm.SecretSuperTrainingUnlocked;
             CHK_SecretComplete.Checked = pkm.SecretSuperTrainingComplete;
 
-            if (pkm is PK6)
+            if (pkm is PK6 pk6)
             {
                 CB_Bag.Items.Clear();
                 CB_Bag.Items.Add("---");
                 for (int i = 1; i < GameInfo.Strings.trainingbags.Length - 1; i++)
                     CB_Bag.Items.Add(GameInfo.Strings.trainingbags[i]);
 
-                PK6 pk6 = (PK6) pkm;
                 CB_Bag.SelectedIndex = pk6.TrainingBag;
                 NUD_BagHits.Value = pk6.TrainingBagHits;
 
                 if (!CHK_SecretUnlocked.Checked) // force update to disable checkboxes
-                    CHK_Secret_CheckedChanged(null, null);
+                    CHK_Secret_CheckedChanged(this, EventArgs.Empty);
             }
             else
             {
@@ -49,44 +49,49 @@ namespace PKHeX.WinForms
             }
         }
 
-        private readonly List<RegimenInfo> reglist = new List<RegimenInfo>();
-        private readonly List<RegimenInfo> distlist = new List<RegimenInfo>();
-        private readonly PKM pkm = Main.pkm.Clone();
-        private const string PrefixLabel = "L_";
+        private readonly List<RegimenInfo> reglist = new();
+        private readonly List<RegimenInfo> distlist = new();
+        private readonly ISuperTrain pkm;
         private const string PrefixCHK = "CHK_";
 
-        private void B_Cancel_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+        private void B_Cancel_Click(object sender, EventArgs e) => Close();
+
         private void B_Save_Click(object sender, EventArgs e)
         {
-            save();
+            Save();
             Close();
         }
 
-        private void populateRegimens(string Type, TableLayoutPanel TLP, List<RegimenInfo> list)
+        private void PopulateRegimens(string propertyPrefix, TableLayoutPanel TLP, List<RegimenInfo> list)
         {
             // Get a list of all Regimen Attregutes in the PKM
-            var RegimenNames = ReflectUtil.getPropertiesStartWithPrefix(pkm.GetType(), Type);
-            list.AddRange(from RegimenName in RegimenNames
-                          let RegimenValue = ReflectUtil.GetValue(pkm, RegimenName)
-                          where RegimenValue is bool
-                          select new RegimenInfo(RegimenName, (bool) RegimenValue));
+            list.AddRange(GetBooleanRegimenNames(pkm, propertyPrefix));
             TLP.ColumnCount = 1;
             TLP.RowCount = 0;
-            
+
             // Add Regimens
             foreach (var reg in list)
-                addRegimenChoice(reg, TLP);
+                AddRegimenChoice(reg, TLP);
 
             // Force auto-size
-            foreach (RowStyle style in TLP.RowStyles)
+            foreach (var style in TLP.RowStyles.OfType<RowStyle>())
                 style.SizeType = SizeType.AutoSize;
-            foreach (ColumnStyle style in TLP.ColumnStyles)
+            foreach (var style in TLP.ColumnStyles.OfType<ColumnStyle>())
                 style.SizeType = SizeType.AutoSize;
         }
-        private void addRegimenChoice(RegimenInfo reg, TableLayoutPanel TLP)
+
+        private static IEnumerable<RegimenInfo> GetBooleanRegimenNames(ISuperTrain pkm, string propertyPrefix)
+        {
+            var names = ReflectUtil.GetPropertiesStartWithPrefix(pkm.GetType(), propertyPrefix);
+            foreach (var name in names)
+            {
+                var value = ReflectUtil.GetValue(pkm, name);
+                if (value is bool state)
+                    yield return new RegimenInfo(name, state);
+            }
+        }
+
+        private static void AddRegimenChoice(RegimenInfo reg, TableLayoutPanel TLP)
         {
             // Get row we add to
             int row = TLP.RowCount;
@@ -101,21 +106,20 @@ namespace PKHeX.WinForms
                 AutoSize = true,
                 Padding = Padding.Empty,
             };
-            chk.CheckedChanged += (sender, e) => { reg.CompletedRegimen = chk.Checked; };
+            chk.CheckedChanged += (sender, e) => reg.CompletedRegimen = chk.Checked;
             chk.Checked = reg.CompletedRegimen;
             TLP.Controls.Add(chk, 0, row);
         }
 
-        private void save()
+        private void Save()
         {
             foreach (var reg in reglist)
                 ReflectUtil.SetValue(pkm, reg.Name, reg.CompletedRegimen);
             foreach (var reg in distlist)
                 ReflectUtil.SetValue(pkm, reg.Name, reg.CompletedRegimen);
 
-            if (pkm is PK6)
+            if (pkm is PK6 pk6)
             {
-                PK6 pk6 = (PK6) pkm;
                 pk6.SecretSuperTrainingUnlocked = CHK_SecretUnlocked.Checked;
                 pk6.SecretSuperTrainingComplete = CHK_SecretComplete.Checked;
                 pk6.TrainingBag = CB_Bag.SelectedIndex;
@@ -126,15 +130,14 @@ namespace PKHeX.WinForms
                 pkm.SecretSuperTrainingUnlocked &= CHK_SecretUnlocked.Checked;
                 pkm.SecretSuperTrainingComplete &= CHK_SecretComplete.Checked;
             }
-
-            Main.pkm = pkm;
         }
-        
-        private class RegimenInfo
+
+        private sealed class RegimenInfo
         {
             public readonly string Name;
             public bool CompletedRegimen;
-            public RegimenInfo(string name, bool completedRegimen)
+
+            internal RegimenInfo(string name, bool completedRegimen)
             {
                 Name = name;
                 CompletedRegimen = completedRegimen;
@@ -144,8 +147,10 @@ namespace PKHeX.WinForms
         private void B_All_Click(object sender, EventArgs e)
         {
             if (CHK_SecretUnlocked.Checked) // only give dist if Secret is Unlocked (None -> All -> All*)
+            {
                 foreach (var c in TLP_DistSuperTrain.Controls.OfType<CheckBox>())
                     c.Checked = true;
+            }
 
             if (pkm is PK6)
             {
@@ -155,6 +160,7 @@ namespace PKHeX.WinForms
             foreach (var c in TLP_SuperTrain.Controls.OfType<CheckBox>())
                 c.Checked = true;
         }
+
         private void B_None_Click(object sender, EventArgs e)
         {
             CHK_SecretUnlocked.Checked = false;
@@ -164,9 +170,10 @@ namespace PKHeX.WinForms
             foreach (var c in TLP_DistSuperTrain.Controls.OfType<CheckBox>())
                 c.Checked = false;
         }
+
         private void CHK_Secret_CheckedChanged(object sender, EventArgs e)
         {
-            if (!(pkm is PK6))
+            if (pkm is not PK6)
                 return;
             CHK_SecretComplete.Checked &= CHK_SecretUnlocked.Checked;
             CHK_SecretComplete.Enabled = CHK_SecretUnlocked.Checked;

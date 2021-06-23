@@ -1,0 +1,69 @@
+0744	(RO) Groudon Vaincu
+2935	(RO) Groudon Capturé
+0743	(SA) Kyogre Vaincu
+2936	(SA) Kyogre Capturé
+0304	(RO) Ho-Oh Vaincu
+2911	(RO) Ho-Oh Capturé
+0305	(SA) Lugia Vaincu
+2910	(SA) Lugia Capturé
+2915	(SA) Dialga Capturé
+2916	(RO) Palkia Capturé
+2924	(RO) Boréas Capturé
+2925	(SA) Fulguris Capturé
+2928	Démétéros Capturé
+0278	(RO) Reshiram Vaincu
+2926	(RO) Reshiram Capturé
+0279	(SA) Zekrom Vaincu
+2927	(SA) Zekrom Capturé
+0515	Latias Disparu
+2930	Latias Capturé
+0516	Latios Disparu
+2931	Latios Capturé
+3010	Reçu Passe Éon
+3011	Évt. Ticket Éon Complété
+1041	Deoxys Disparu @ Pilier Céleste
+2938	Deoxys Capturé @ Pilier Céleste
+0269	Raikou Vaincu
+2907	Raikou Capturé
+0270	Entei Vaincu
+2908	Entei Capturé
+0271	Suicune Vaincu
+2909	Suicune Capturé
+0272	Cobaltium Vaincu
+2921	Cobaltium Capturé
+0273	Terrakium Vaincu
+2922	Terrakium Capturé
+0274	Viridium Vaincu
+2923	Viridium Capturé
+0280	Kyurem Vaincu
+2929	Kyurem Capturé
+0275	Créhelf Vaincu
+2912	Créhelf Capturé
+0276	Créfollet Vaincu
+2913	Créfollet Capturé
+0277	Créfadet Vaincu
+2914	Créfadet Capturé
+0268	Cresselia Vaincu
+2920	Cresselia Capturé
+2919	Giratina Capturé
+0356	Heatran Vaincu
+2917	Heatran Capturé
+1052	Regirock Vaincu
+2932	Regirock Capturé
+1053	Regice Vaincu
+2933	Regice Capturé
+1054	Registeel Vaincu
+2934	Registeel Capturé
+0348	Regigigas Vaincu
+2918	Regigigas Capturé
+0380	Statuette Solo
+0381	Statuette Duo
+0382	Statuette Trio
+0383	Statuette Rotatif
+0384	Statuette Multi
+0385	Super Solo Débloqué
+0386	Super Duo Débloqué
+0387	Super Trio Débloqué
+0388	Super Rotatif Débloqué
+0389	Super Multi Débloqué
+2738	Foreign DexNav Encounters Unlocked

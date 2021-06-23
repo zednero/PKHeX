@@ -34,6 +34,7 @@
             this.SpecName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.New = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.BST = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CatchRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Type1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.Type2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.HP = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,6 +62,7 @@
             this.SpecName,
             this.New,
             this.BST,
+            this.CatchRate,
             this.Type1,
             this.Type2,
             this.HP,
@@ -105,10 +107,10 @@
             // New
             // 
             this.New.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.New.HeaderText = "Alola";
+            this.New.HeaderText = "Native";
             this.New.Name = "New";
             this.New.ReadOnly = true;
-            this.New.Width = 36;
+            this.New.Width = 44;
             // 
             // BST
             // 
@@ -117,6 +119,13 @@
             this.BST.Name = "BST";
             this.BST.ReadOnly = true;
             this.BST.Width = 53;
+            // 
+            // CatchRate
+            // 
+            this.CatchRate.HeaderText = "Catch Rate";
+            this.CatchRate.Name = "CatchRate";
+            this.CatchRate.ReadOnly = true;
+            this.CatchRate.Width = 85;
             // 
             // Type1
             // 
@@ -223,21 +232,22 @@
 
         #endregion
         private System.Windows.Forms.DataGridView DGV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AbilityH;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ability1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ability0;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SPE;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SPD;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SPA;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DEF;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ATK;
-        private System.Windows.Forms.DataGridViewTextBoxColumn HP;
-        private System.Windows.Forms.DataGridViewImageColumn Type2;
-        private System.Windows.Forms.DataGridViewImageColumn Type1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BST;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn New;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SpecName;
-        private System.Windows.Forms.DataGridViewImageColumn Sprite;
         private System.Windows.Forms.DataGridViewTextBoxColumn d_Index;
+        private System.Windows.Forms.DataGridViewImageColumn Sprite;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SpecName;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn New;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BST;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CatchRate;
+        private System.Windows.Forms.DataGridViewImageColumn Type1;
+        private System.Windows.Forms.DataGridViewImageColumn Type2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn HP;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ATK;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DEF;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SPA;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SPD;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SPE;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ability0;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ability1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AbilityH;
     }
 }

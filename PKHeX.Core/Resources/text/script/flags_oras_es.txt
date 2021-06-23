@@ -1,0 +1,69 @@
+0744	(OR) Groudon Derrotado
+2935	(OR) Groudon Capturado
+0743	(AS) Kyogre Derrotado
+2936	(AS) Kyogre Capturado
+0304	(OR) Ho-Oh Derrotado
+2911	(OR) Ho-Oh Capturado
+0305	(AS) Lugia Derrotado
+2910	(AS) Lugia Capturado
+2915	(AS) Dialga Capturado
+2916	(OR) Palkia Capturado
+2924	(OR) Tornadus Capturado
+2925	(AS) Thundurus Capturado
+2928	Landorus Capturado
+0278	(OR) Reshiram Derrotado
+2926	(OR) Reshiram Capturado
+0279	(AS) Zekrom Derrotado
+2927	(AS) Zekrom Capturado
+0515	Latias Desaparecida
+2930	Latias Capturada
+0516	Latios Desaparecido
+2931	Latios Capturado
+3010	Recibido Ticket Eón
+3011	Completado Evento del Ticket Eón
+1041	Deoxys Desaparecido (Pilar Celeste)
+2938	Deoxys Capturado (Pilar Celeste)
+0269	Raikou Derrotado
+2907	Raikou Capturado
+0270	Entei Derrotado
+2908	Entei Capturado
+0271	Suicune Derrotado
+2909	Suicune Capturado
+0272	Cobalion Derrotado
+2921	Cobalion Capturado
+0273	Terrakion Derrotado
+2922	Terrakion Capturado
+0274	Virizion Derrotado
+2923	Virizion Capturado
+0280	Kyurem Derrotado
+2929	Kyurem Capturado
+0275	Uxie Derrotado
+2912	Uxie Capturado
+0276	Mesprit Derrotado
+2913	Mesprit Capturado
+0277	Azelf Derrotado
+2914	Azelf Capturado
+0268	Cresselia Derrotada
+2920	Cresselia Capturada
+2919	Giratina Capturado
+0356	Heatran Derrotado
+2917	Heatran Capturado
+1052	Regirock Derrotado
+2932	Regirock Capturado
+1053	Regice Derrotado
+2933	Regice Capturado
+1054	Registeel Derrotado
+2934	Registeel Capturado
+0348	Regigigas Derrotado
+2918	Regigigas Capturado
+0380	Indiv. Statuette
+0381	Dobles Statuette
+0382	Triples Statuette
+0383	Rotación Statuette
+0384	Multi Statuette
+0385	Super Indiv. Desbloqueado
+0386	Super Dobles Desbloqueado
+0387	Super Triples Desbloqueado
+0388	Super Rotación Desbloqueado
+0389	Super Multi Desbloqueado
+2738	Encuentros extranjeros de DexNav desbloqueados
